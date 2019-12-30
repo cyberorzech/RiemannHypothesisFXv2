@@ -3,11 +3,17 @@ package sample.data;
 import org.apache.commons.math3.complex.Complex;
 
 public class Initialize {
-    private final int iterationsAmount = 1000;
+    private static int iterationsAmount;
+    private static boolean stop;
 
     public Initialize(){
+        iterationsAmount = 0;
+        System.out.println("Data model has been initialized successfully.");
+    }
+
+    public static void computationInit(){
         int currentIterations = 0;
-        while (this.iterationsAmount > currentIterations)
+        while (iterationsAmount > currentIterations && !stop)
         {
             DataGeneration data = new DataGeneration(currentIterations);
             Complex z = new Complex(data.getterReal(), data.getterImag());
@@ -24,5 +30,18 @@ public class Initialize {
             //System.out.print(ZetaValue.leastAbsValue);
             //System.out.print(" " + ZetaValue.whichIterationLeastAbsValueHappened);
         }
+        stop = false;
+    }
+
+
+//    metody do obslugi zdarzen
+    public static void setterIterationsAmount(int iterationsNoTextField){
+        iterationsAmount = iterationsNoTextField;
+    }
+    public static int iterationsAmountGetter(){
+        return iterationsAmount;
+    }
+    public static void setStop(boolean value){
+        stop = value;
     }
 }
