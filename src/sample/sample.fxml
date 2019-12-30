@@ -17,20 +17,21 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
-      <BorderPane prefHeight="434.0" prefWidth="663.0" GridPane.rowIndex="1">
+      <BorderPane prefHeight="434.0" prefWidth="663.0" GridPane.rowIndex="2">
          <bottom>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Compute">
+                  <Button fx:id="ComputeButton" mnemonicParsing="false" onAction="#onButtonClicked" text="Compute">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="Stop">
+                  <Button fx:id="StopButton" onAction="#onButtonClicked" mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="Stop">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin></Button>
@@ -54,19 +55,19 @@
                   <Label layoutX="5.0" layoutY="87.0" text="ImgStart" />
                   <Label layoutX="6.0" layoutY="162.0" text="ImgStep" />
                   <Label layoutX="5.0" layoutY="238.0" text="IterNo" />
-                  <Button layoutX="80.0" layoutY="9.0" mnemonicParsing="false" text="Change" />
-                  <Button layoutX="80.0" layoutY="82.0" mnemonicParsing="false" text="Change" />
-                  <Button layoutX="80.0" layoutY="157.0" mnemonicParsing="false" text="Change" />
-                  <Button layoutX="80.0" layoutY="233.0" mnemonicParsing="false" text="Change" />
-                  <Label contentDisplay="CENTER" layoutX="8.0" layoutY="36.0" prefHeight="17.0" prefWidth="137.0" text="Label" textAlignment="CENTER" textFill="#0271f8" />
-                  <Label contentDisplay="CENTER" layoutX="8.0" layoutY="109.0" prefHeight="17.0" prefWidth="137.0" text="Label" textAlignment="CENTER" textFill="#0271f8" />
-                  <Label contentDisplay="CENTER" layoutX="8.0" layoutY="184.0" prefHeight="17.0" prefWidth="137.0" text="Label" textAlignment="CENTER" textFill="#0271f8" />
-                  <Label contentDisplay="CENTER" layoutX="8.0" layoutY="260.0" prefHeight="17.0" prefWidth="137.0" text="Label" textAlignment="CENTER" textFill="#0271f8" />
-                  <CheckBox layoutX="25.0" layoutY="386.0" mnemonicParsing="false" selected="true" text="Random Real Part">
+                  <Button fx:id="RealPartChangeButton" layoutX="80.0" layoutY="9.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="ImgStartChangeButton" layoutX="80.0" layoutY="82.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="ImgStepChangeButton" layoutX="80.0" layoutY="157.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="IterNoChangeButton" layoutX="80.0" layoutY="233.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <CheckBox fx:id="RealPartCheckbox" layoutX="25.0" layoutY="386.0" mnemonicParsing="false" onAction="#onButtonClicked" selected="true" text="Random Real Part">
                      <font>
                         <Font name="System Italic" size="10.0" />
                      </font></CheckBox>
                   <Separator layoutX="-19.0" layoutY="376.0" prefWidth="200.0" />
+                  <TextField fx:id="RealPartTextField" editable="false" layoutX="6.0" layoutY="36.0" prefHeight="27.0" prefWidth="139.0" />
+                  <TextField fx:id="ImgStartTextField" layoutX="6.0" layoutY="109.0" prefHeight="27.0" prefWidth="140.0" text="0.0" />
+                  <TextField fx:id="ImgStepTextField" layoutX="6.0" layoutY="184.0" prefHeight="27.0" prefWidth="140.0" text="0.01" />
+                  <TextField fx:id="IterNoTextField" layoutX="6.0" layoutY="260.0" prefHeight="27.0" prefWidth="140.0" text="1000" />
                </children>
             </Pane>
          </left>
@@ -83,9 +84,9 @@
                   </LineChart>
                </children></HBox>
          </center></BorderPane>
-      <Pane>
+      <Pane GridPane.rowIndex="1">
          <children>
-            <ProgressBar prefHeight="20.0" prefWidth="144.0" progress="0.0" />
+            <ProgressBar prefHeight="20.0" prefWidth="663.0" progress="0.0" />
          </children>
       </Pane>
    </children>

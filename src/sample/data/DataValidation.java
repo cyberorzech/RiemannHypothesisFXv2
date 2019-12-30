@@ -1,0 +1,14 @@
+package sample.data;
+
+public class DataValidation {
+    private boolean correct = true;
+    public DataValidation(){
+        if (Initialize.iterationsAmountGetter() < 1){
+            this.correct = false;
+            System.out.println("Variables entered by users don't meet the requirements (iterations amount has to be greater than 0)");
+        }
+    }
+    public boolean getter(){
+        return this.correct;
+    }
+}

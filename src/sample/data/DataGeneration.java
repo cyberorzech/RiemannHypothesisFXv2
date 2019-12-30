@@ -2,15 +2,14 @@ package sample.data;
 
 public class DataGeneration {
     private static double real;
-    private double imag = 0.01;
-    private static final double divisionConstant = 100.0;
+    private static double imagStart;
+    private static double imagStep;
+    private double imag = 0.0;
 
     public DataGeneration(int n){
-        if (n == 0)
-            real = Math.random();
-        imag += n/divisionConstant;
+        imag = imagStart + n*imagStep;
     }
-    public double getterReal()
+    public static double getterReal()
     {
         return real;
     }
@@ -18,4 +17,25 @@ public class DataGeneration {
     {
         return imag;
     }
+    public static void randomReal(){
+        real = Math.random();
+    }
+
+//    metody do obsługi zdarzeń
+    public static void setterReal(double realFromTextField){
+        real = realFromTextField;
+    }
+    public static void setterImagStart(double imagFromTextField){
+        imagStart = imagFromTextField;
+    }
+    public static void setterImagStep(double imagFromTextField){
+        imagStep = imagFromTextField;
+    }
+    public static double getterimagStart(){
+        return imagStart;
+    }
+    public static double getterimagStep(){
+        return imagStep;
+    }
+
 }
