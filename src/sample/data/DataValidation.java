@@ -1,14 +1,27 @@
 package sample.data;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
 public class DataValidation {
-    private boolean correct = true;
-    public DataValidation(){
-        if (Initialize.iterationsAmountGetter() < 1){
-            this.correct = false;
-            System.out.println("Variables entered by users don't meet the requirements (iterations amount has to be greater than 0)");
+    public static boolean realPartCheck(double x){
+        if (x >= 0.0 && x < 1 && x != 0.5){
+            return true;
+        }
+        else {
+            return false;
         }
     }
-    public boolean getter(){
-        return this.correct;
+    public static boolean imgStepCheck(double x){
+        if (x > 0)
+            return true;
+        else
+            return false;
+    }
+    public static boolean iterNoCheck(double x){
+        if (x > 1)
+            return true;
+        else
+            return false;
     }
 }

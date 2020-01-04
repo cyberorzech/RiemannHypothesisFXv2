@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -31,7 +32,7 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="StopButton" onAction="#onButtonClicked" mnemonicParsing="false" prefHeight="27.0" prefWidth="73.0" text="Stop">
+                  <Button fx:id="StopButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="27.0" prefWidth="73.0" text="Stop">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin></Button>
@@ -64,25 +65,29 @@
                         <Font name="System Italic" size="10.0" />
                      </font></CheckBox>
                   <Separator layoutX="-19.0" layoutY="376.0" prefWidth="200.0" />
-                  <TextField fx:id="RealPartTextField" editable="false" layoutX="6.0" layoutY="36.0" prefHeight="27.0" prefWidth="139.0" />
+                  <TextField fx:id="RealPartTextField" editable="false" layoutX="6.0" layoutY="36.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="139.0" />
                   <TextField fx:id="ImgStartTextField" layoutX="6.0" layoutY="109.0" prefHeight="27.0" prefWidth="140.0" text="0.0" />
-                  <TextField fx:id="ImgStepTextField" layoutX="6.0" layoutY="184.0" prefHeight="27.0" prefWidth="140.0" text="0.01" />
-                  <TextField fx:id="IterNoTextField" layoutX="6.0" layoutY="260.0" prefHeight="27.0" prefWidth="140.0" text="1000" />
+                  <TextField fx:id="ImgStepTextField" layoutX="6.0" layoutY="184.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="0.01" />
+                  <TextField fx:id="IterNoTextField" layoutX="6.0" layoutY="260.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="1000" />
                </children>
             </Pane>
          </left>
          <center>
-            <HBox prefHeight="390.0" prefWidth="501.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="Pejn">
                <children>
-                  <LineChart prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
+                  <LineChart fx:id="ZetaChart" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis label="ReZ" side="BOTTOM" fx:id="xAxis" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis fx:id="yAxis" label="ImZ" side="LEFT" />
                     </yAxis>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
                   </LineChart>
-               </children></HBox>
+               </children>
+            </Pane>
          </center></BorderPane>
       <Pane GridPane.rowIndex="1">
          <children>

@@ -16,19 +16,11 @@ public class Initialize {
         while (iterationsAmount > currentIterations && !stop)
         {
             DataGeneration data = new DataGeneration(currentIterations);
-            Complex z = new Complex(data.getterReal(), data.getterImag());
+            Complex z = new Complex(DataGeneration.getterReal(), data.getterImag());
             ZetaValue value = new ZetaValue(z, currentIterations);
             System.out.println(currentIterations + ". For input z = " + z + " value of Zeta is: " + value.getter());
 
-            //generowanie danych
-            //obliczenia
-            //zapisanie danych w pliku
-
-            //popraw wyswietlanie iteracji z najmniejsza wartoscia bezwzgledna
             ++currentIterations;
-
-            //System.out.print(ZetaValue.leastAbsValue);
-            //System.out.print(" " + ZetaValue.whichIterationLeastAbsValueHappened);
         }
         stop = false;
     }
