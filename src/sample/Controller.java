@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -57,6 +58,8 @@ public class Controller {
     private TextField ImgStepTextField;
     @FXML
     private TextField IterNoTextField;
+    @FXML
+    private ProgressBar ProgBar;
 
 
     //    event handler dla przyciskow i checkboxa
@@ -114,8 +117,9 @@ public class Controller {
 
         else if (e.getSource().equals(ComputeButton)){
             System.out.println("Compute button has been pressed");
-
-            DataToChart newobject = new DataToChart();
+            Initialize.computationInit();
+            DataToChart.addData();
+            ZetaChart.getData().add(DataToChart.series);
         }
         else if (e.getSource().equals(StopButton)){
             Initialize.setStop(true);

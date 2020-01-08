@@ -6,11 +6,13 @@ import javafx.scene.chart.XYChart;
 
 public class DataToChart {
     @FXML
-    private LineChart ZetaChart;
+    private LineChart<Number, Number> ZetaChart;
 
-    public DataToChart(){
+    public static XYChart.Series<Number, Number> series = new XYChart.Series<>();
+
+    public static void addData(){
         //defining a series
-        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        //XYChart.Series<Number, Number> series = new XYChart.Series<>();
         series.setName("My portfolio");
 
         //populating the series with data
@@ -27,6 +29,6 @@ public class DataToChart {
         series.getData().add(new XYChart.Data<>(11, 29));
         series.getData().add(new XYChart.Data<>(12, 25));
 
-        ZetaChart.getData().add(series);
+        //ZetaChart.getData().add(series);
     }
 }

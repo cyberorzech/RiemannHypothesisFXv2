@@ -91,7 +91,7 @@
          </center></BorderPane>
       <Pane GridPane.rowIndex="1">
          <children>
-            <ProgressBar prefHeight="20.0" prefWidth="663.0" progress="0.0" />
+            <ProgressBar fx:id="ProgBar" prefHeight="20.0" prefWidth="663.0" progress="0.0" />
          </children>
       </Pane>
    </children>
