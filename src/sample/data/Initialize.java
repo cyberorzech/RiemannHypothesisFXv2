@@ -1,15 +1,14 @@
 package sample.data;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import org.apache.commons.math3.complex.Complex;
 
 public class Initialize {
-    private static int iterationsAmount;
+    private static int iterationsAmount = 0;
     private static boolean stop;
-
-    public Initialize(){
-        iterationsAmount = 0;
-        System.out.println("Data model has been initialized successfully.");
-    }
+    @FXML
+    private static ProgressBar ProgBar;
 
     public static void computationInit(){
         int currentIterations = 0;
@@ -19,7 +18,7 @@ public class Initialize {
             Complex z = new Complex(DataGeneration.getterReal(), data.getterImag());
             ZetaValue value = new ZetaValue(z, currentIterations);
             System.out.println(currentIterations + ". For input z = " + z + " value of Zeta is: " + value.getter());
-
+            ProgBar.setProgress(currentIterations/iterationsAmount);
             ++currentIterations;
         }
         stop = false;
