@@ -3,16 +3,17 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import sample.data.DataGeneration;
 import sample.data.DataToChart;
 import sample.data.DataValidation;
 import sample.data.Initialize;
+
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 public class Controller {
 
@@ -47,15 +48,22 @@ public class Controller {
     @FXML
     private TextField iterNoTextField;
     @FXML
-    private ProgressBar ProgBar;
+    private ProgressBar bar;
+    @FXML
+    private ChoiceBox<String> choiceBox;
 
 
     //    event handler dla przyciskow i checkboxa
+
+    /**
+     * gygyjhjhhj
+     * @param e
+     */
     @FXML
     public void onButtonClicked(ActionEvent e){
         if (e.getSource().equals(realPartChangeButton)){
             if (DataValidation.realPartCheck(Double.parseDouble(realPartTextField.getText()))){
-                realPartTextField.setStyle("-fx-text-inner-color: green;");
+                setGreen(realPartTextField);
                 DataGeneration.setterReal(Double.parseDouble(realPartTextField.getText()));
             }
             else {
@@ -69,7 +77,7 @@ public class Controller {
         }
         else if (e.getSource().equals(imgStepChangeButton)){
             if (DataValidation.imgStepCheck(Double.parseDouble(imgStepTextField.getText()))){
-                imgStepTextField.setStyle("-fx-text-inner-color: green;");
+                setGreen(imgStepTextField);
                 DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
             }
             else
@@ -79,7 +87,7 @@ public class Controller {
         else if (e.getSource().equals(iterNoChangeButton)){
             if (DataValidation.iterNoCheck(Double.parseDouble(iterNoTextField.getText()))){
                 Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
-                iterNoTextField.setStyle("-fx-text-inner-color: green;");
+                setGreen(iterNoTextField);
             }
             else
                 iterNoTextField.setText("Invalid data.");
@@ -97,7 +105,7 @@ public class Controller {
                 realPartTextField.setText(Double.toString(DataGeneration.getterReal()));
                 realPartTextField.setOpacity(0.5);
                 realPartTextField.setEditable(false);
-                realPartTextField.setStyle("-fx-text-inner-color: green;");
+                setGreen(realPartTextField);
             }
             System.out.println("Checkbox chosen");
         }
@@ -105,9 +113,15 @@ public class Controller {
 
         else if (e.getSource().equals(computeButton)){
             System.out.println("Compute button has been pressed");
+            DataToChart.eraseData();
+            //DataToChart.showData();                                       tu mozesz pokazac blad odczytu - dane sa czyszczone
             Initialize.computationInit();
-            //DataToChart.addData();
-            zetaChart.getData().add(DataToChart.series);
+            try{
+                zetaChart.getData().add(DataToChart.series);
+            }
+            catch (IllegalArgumentException ex){
+                System.out.println("ex");
+            }
         }
         else if (e.getSource().equals(stopButton)){
             Initialize.setStop(true);
@@ -120,7 +134,7 @@ public class Controller {
         if (e.getSource().equals(realPartTextField)){
             switch (e.getCode()){
                 case BACK_SPACE:
-                    realPartTextField.setStyle("-fx-text-inner-color: red;");
+                    setRed(realPartTextField);
                     break;
                 default:
                     break;
@@ -128,10 +142,10 @@ public class Controller {
         }
 
         if (e.getSource().equals(imgStepTextField)){
-            System.out.println("Wcisnales imgstep");
+            System.out.println("imgStepTextField chosen");
             switch (e.getCode()){
                 case BACK_SPACE:
-                    imgStepTextField.setStyle("-fx-text-inner-color: red;");
+                    setRed(imgStepTextField);
                     break;
                 default:
                     break;
@@ -141,12 +155,24 @@ public class Controller {
         if (e.getSource().equals(iterNoTextField)){
             switch (e.getCode()){
                 case BACK_SPACE:
-                    iterNoTextField.setStyle("-fx-text-inner-color: red;");
+                    setRed(iterNoTextField);
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    @FXML
+    public void onMouseClicked(MouseEvent e) throws FileNotFoundException {
+        PrintStream fileOut = new PrintStream("./out.txt");
+        System.setOut(fileOut);
+        System.out.println(" ");
+
+//        System.out.println(e.getX());
+//        DataToChart object = new DataToChart();
+//        object.showData();
+//        System.out.println(xAxis.getDisplayPosition(object.iks));
     }
 
     @FXML
@@ -160,11 +186,12 @@ public class Controller {
         DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
         Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
 
-        realPartTextField.setStyle("-fx-text-inner-color: green;");
-        imgStartTextField.setStyle("-fx-text-inner-color: green;");
-        imgStepTextField.setStyle("-fx-text-inner-color: green;");
-        iterNoTextField.setStyle("-fx-text-inner-color: green;");
-        //ProgBar.setProgress(0.0);
+        setGreen(realPartTextField);
+        setGreen(imgStartTextField);
+        setGreen(imgStepTextField);
+        setGreen(iterNoTextField);
+
+
     }
 
     /*@FXML
@@ -172,4 +199,13 @@ public class Controller {
         double progress = (double)(currentIterations/iterationsAmount);
         ProgBar.setProgress(progress);
     }*/
+    private void setGreen(TextField field){
+        field.setStyle("-fx-text-inner-color: green;");
+    }
+    private void setRed(TextField field){
+        field.setStyle("-fx-text-inner-color: red;");
+    }
+    public void setBarProgress(ProgressBar b){
+        b.setProgress(Initialize.progress);
+    }
 }

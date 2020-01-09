@@ -8,7 +8,7 @@ public class ComputationProgress {
     private ProgressBar ProgBar;
 
     public void comp(int iterationsAmount, int currentIterations){
-        double x = currentIterations/iterationsAmount;
+        double x = (double)currentIterations/iterationsAmount;
         System.out.println("Progress is " + x);
         ProgBar.setProgress(x);
     }
