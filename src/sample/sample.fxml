@@ -25,14 +25,14 @@
          <bottom>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="ComputeButton" mnemonicParsing="false" onAction="#onButtonClicked" text="Compute">
+                  <Button fx:id="computeButton" mnemonicParsing="false" onAction="#onButtonClicked" text="Compute">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="StopButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="27.0" prefWidth="73.0" text="Stop">
+                  <Button fx:id="stopButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="27.0" prefWidth="73.0" text="Stop">
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin></Button>
@@ -56,28 +56,28 @@
                   <Label layoutX="5.0" layoutY="87.0" text="ImgStart" />
                   <Label layoutX="6.0" layoutY="162.0" text="ImgStep" />
                   <Label layoutX="5.0" layoutY="238.0" text="IterNo" />
-                  <Button fx:id="RealPartChangeButton" layoutX="80.0" layoutY="9.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
-                  <Button fx:id="ImgStartChangeButton" layoutX="80.0" layoutY="82.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
-                  <Button fx:id="ImgStepChangeButton" layoutX="80.0" layoutY="157.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
-                  <Button fx:id="IterNoChangeButton" layoutX="80.0" layoutY="233.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
-                  <CheckBox fx:id="RealPartCheckbox" layoutX="25.0" layoutY="386.0" mnemonicParsing="false" onAction="#onButtonClicked" selected="true" text="Random Real Part">
+                  <Button fx:id="realPartChangeButton" layoutX="80.0" layoutY="9.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="imgStartChangeButton" layoutX="80.0" layoutY="82.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="imgStepChangeButton" layoutX="80.0" layoutY="157.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <Button fx:id="iterNoChangeButton" layoutX="80.0" layoutY="233.0" mnemonicParsing="false" onAction="#onButtonClicked" text="Change" />
+                  <CheckBox fx:id="realPartCheckbox" layoutX="25.0" layoutY="386.0" mnemonicParsing="false" onAction="#onButtonClicked" selected="true" text="Random Real Part">
                      <font>
                         <Font name="System Italic" size="10.0" />
                      </font></CheckBox>
                   <Separator layoutX="-19.0" layoutY="376.0" prefWidth="200.0" />
-                  <TextField fx:id="RealPartTextField" editable="false" layoutX="6.0" layoutY="36.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="139.0" />
-                  <TextField fx:id="ImgStartTextField" layoutX="6.0" layoutY="109.0" prefHeight="27.0" prefWidth="140.0" text="0.0" />
-                  <TextField fx:id="ImgStepTextField" layoutX="6.0" layoutY="184.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="0.01" />
-                  <TextField fx:id="IterNoTextField" layoutX="6.0" layoutY="260.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="1000" />
+                  <TextField fx:id="realPartTextField" editable="false" layoutX="6.0" layoutY="36.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="139.0" />
+                  <TextField fx:id="imgStartTextField" layoutX="6.0" layoutY="109.0" prefHeight="27.0" prefWidth="140.0" text="0.0" />
+                  <TextField fx:id="imgStepTextField" layoutX="6.0" layoutY="184.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="0.01" />
+                  <TextField fx:id="iterNoTextField" layoutX="6.0" layoutY="260.0" onKeyPressed="#onKeyPressed" prefHeight="27.0" prefWidth="140.0" text="10" />
                </children>
             </Pane>
          </left>
          <center>
             <Pane fx:id="Pejn">
                <children>
-                  <LineChart fx:id="ZetaChart" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
+                  <LineChart fx:id="zetaChart" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
                     <xAxis>
-                      <CategoryAxis label="ReZ" side="BOTTOM" fx:id="xAxis" />
+                      <NumberAxis label="ReZ" side="BOTTOM" fx:id="xAxis" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis fx:id="yAxis" label="ImZ" side="LEFT" />

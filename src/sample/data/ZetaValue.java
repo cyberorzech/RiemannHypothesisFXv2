@@ -9,26 +9,32 @@ public class ZetaValue {
     private static final Complex ONE = new Complex(1,0);
     private static final Complex PI = new Complex(0 + Math.PI, 0);
     private static final Complex HALFPI = new Complex(0 + Math.PI/2, 0);
-    public static double leastAbsValue = 100000.0;
-    public static double whichIterationLeastAbsValueHappened;
+//    public static double leastAbsValue = 100000.0;
+//    public static double whichIterationLeastAbsValueHappened;
+    private double absoluteValue;
     private int n = 1;
     private Complex end = new Complex(0.5, 0.5);
 
     public ZetaValue(Complex z, double m)
     {
         result = compute(z);
-        checkIfLeast(result, m);
+        absoluteValue = result.abs();
+        //checkIfLeast(result, m);
     }
 
-    private void checkIfLeast(Complex z, double m)
-    {
-        double currentAbsValue = absoluteValue(z);
-        if (currentAbsValue < leastAbsValue)
-        {
-            leastAbsValue = currentAbsValue;
-            whichIterationLeastAbsValueHappened = m;
-        }
+    public double absoluteValueGetter(){
+        return absoluteValue;
     }
+
+//    private void checkIfLeast(Complex z, double m)
+//    {
+//        double currentAbsValue = absoluteValue(z);
+//        if (currentAbsValue < leastAbsValue)
+//        {
+//            leastAbsValue = currentAbsValue;
+//            whichIterationLeastAbsValueHappened = m;
+//        }
+//    }
     public Complex getter()
     {
         return this.result;
@@ -50,8 +56,8 @@ public class ZetaValue {
         Complex zetaBetaValue = this.compute(ONE.subtract(x));
         return twoPowX.multiply(piPowX).multiply(sine).multiply(gammaValue).multiply(zetaBetaValue);
     }
-    private double absoluteValue(Complex z)
-    {
-        return z.abs();
-    }
+//    private double absoluteValue(Complex z)
+//    {
+//        return z.abs();
+//    }
 }
