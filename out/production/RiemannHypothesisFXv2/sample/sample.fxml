@@ -4,7 +4,9 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <GridPane alignment="center" hgap="10" prefHeight="566.0" prefWidth="727.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -32,14 +34,15 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="stopButton" mnemonicParsing="false" onAction="#onButtonClicked" prefHeight="27.0" prefWidth="73.0" text="Stop">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin></Button>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="76.0" text="Save">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin></Button>
+                  <ChoiceBox id="choiceBox" prefHeight="27.0" prefWidth="74.0">
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color red="1.0" blue="0.04676089435815811" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </ChoiceBox>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -75,7 +78,7 @@
          <center>
             <Pane fx:id="Pejn">
                <children>
-                  <LineChart fx:id="zetaChart" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
+                  <LineChart fx:id="zetaChart" onMouseClicked="#onMouseClicked" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
                     <xAxis>
                       <NumberAxis label="ReZ" side="BOTTOM" fx:id="xAxis" />
                     </xAxis>
@@ -89,10 +92,6 @@
                </children>
             </Pane>
          </center></BorderPane>
-      <Pane GridPane.rowIndex="1">
-         <children>
-            <ProgressBar fx:id="ProgBar" prefHeight="20.0" prefWidth="663.0" progress="0.0" />
-         </children>
-      </Pane>
+      <Pane GridPane.rowIndex="1" />
    </children>
 </GridPane>
