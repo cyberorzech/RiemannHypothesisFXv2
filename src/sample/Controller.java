@@ -1,63 +1,51 @@
 package sample;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import sample.data.DataGeneration;
 import sample.data.DataToChart;
 import sample.data.DataValidation;
 import sample.data.Initialize;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Controller {
 
     @FXML
     private Pane Pejn;
     @FXML
-    private CategoryAxis xAxis;
+    private NumberAxis xAxis;
     @FXML
     private NumberAxis yAxis;
     @FXML
-    private LineChart<Number, Number> ZetaChart;
+    private LineChart<Number, Number> zetaChart;
     @FXML
-    private Button RealPartChangeButton;
+    private Button realPartChangeButton;
     @FXML
-    private Button ImgStartChangeButton;
+    private Button imgStartChangeButton;
     @FXML
-    private Button ImgStepChangeButton;
+    private Button imgStepChangeButton;
     @FXML
-    private Button IterNoChangeButton;
+    private Button iterNoChangeButton;
     @FXML
-    private Button ComputeButton;
+    private Button computeButton;
     @FXML
-    private Button StopButton;
+    private Button stopButton;
     @FXML
-    private CheckBox RealPartCheckbox;
+    private CheckBox realPartCheckbox;
     @FXML
-    private TextField RealPartTextField;
+    private TextField realPartTextField;
     @FXML
-    private TextField ImgStartTextField;
+    private TextField imgStartTextField;
     @FXML
-    private TextField ImgStepTextField;
+    private TextField imgStepTextField;
     @FXML
-    private TextField IterNoTextField;
+    private TextField iterNoTextField;
     @FXML
     private ProgressBar ProgBar;
 
@@ -65,63 +53,63 @@ public class Controller {
     //    event handler dla przyciskow i checkboxa
     @FXML
     public void onButtonClicked(ActionEvent e){
-        if (e.getSource().equals(RealPartChangeButton)){
-            if (DataValidation.realPartCheck(Double.parseDouble(RealPartTextField.getText()))){
-                RealPartTextField.setStyle("-fx-text-inner-color: green;");
-                DataGeneration.setterReal(Double.parseDouble(RealPartTextField.getText()));
+        if (e.getSource().equals(realPartChangeButton)){
+            if (DataValidation.realPartCheck(Double.parseDouble(realPartTextField.getText()))){
+                realPartTextField.setStyle("-fx-text-inner-color: green;");
+                DataGeneration.setterReal(Double.parseDouble(realPartTextField.getText()));
             }
             else {
-                RealPartTextField.setText("Invalid data.");
+                realPartTextField.setText("Invalid data.");
             }
             System.out.println("RealPart Change Button chosen");
         }
-        else if (e.getSource().equals(ImgStartChangeButton)){
-            DataGeneration.setterImagStart(Double.parseDouble(ImgStartTextField.getText()));
+        else if (e.getSource().equals(imgStartChangeButton)){
+            DataGeneration.setterImagStart(Double.parseDouble(imgStartTextField.getText()));
             System.out.println("Img Start Change Button chosen");
         }
-        else if (e.getSource().equals(ImgStepChangeButton)){
-            if (DataValidation.imgStepCheck(Double.parseDouble(ImgStepTextField.getText()))){
-                ImgStepTextField.setStyle("-fx-text-inner-color: green;");
-                DataGeneration.setterImagStep(Double.parseDouble(ImgStepTextField.getText()));
+        else if (e.getSource().equals(imgStepChangeButton)){
+            if (DataValidation.imgStepCheck(Double.parseDouble(imgStepTextField.getText()))){
+                imgStepTextField.setStyle("-fx-text-inner-color: green;");
+                DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
             }
             else
-                ImgStepTextField.setText("Invalid data.");
+                imgStepTextField.setText("Invalid data.");
             System.out.println("Img Step Change Button chosen");
         }
-        else if (e.getSource().equals(IterNoChangeButton)){
-            if (DataValidation.iterNoCheck(Double.parseDouble(IterNoTextField.getText()))){
-                Initialize.setterIterationsAmount(Integer.parseInt(IterNoTextField.getText()));
-                IterNoTextField.setStyle("-fx-text-inner-color: green;");
+        else if (e.getSource().equals(iterNoChangeButton)){
+            if (DataValidation.iterNoCheck(Double.parseDouble(iterNoTextField.getText()))){
+                Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
+                iterNoTextField.setStyle("-fx-text-inner-color: green;");
             }
             else
-                IterNoTextField.setText("Invalid data.");
+                iterNoTextField.setText("Invalid data.");
             System.out.println("Iter No Change Button Chosen");
         }
-        else if(e.getSource().equals(RealPartCheckbox)){
-            if (!RealPartCheckbox.isSelected()){
-                RealPartChangeButton.setDisable(false);
-                RealPartTextField.setOpacity(1.0);
-                RealPartTextField.setEditable(true);
+        else if(e.getSource().equals(realPartCheckbox)){
+            if (!realPartCheckbox.isSelected()){
+                realPartChangeButton.setDisable(false);
+                realPartTextField.setOpacity(1.0);
+                realPartTextField.setEditable(true);
             }
             else{
-                RealPartChangeButton.setDisable(true);
+                realPartChangeButton.setDisable(true);
                 DataGeneration.randomReal();
-                RealPartTextField.setText(Double.toString(DataGeneration.getterReal()));
-                RealPartTextField.setOpacity(0.5);
-                RealPartTextField.setEditable(false);
-                RealPartTextField.setStyle("-fx-text-inner-color: green;");
+                realPartTextField.setText(Double.toString(DataGeneration.getterReal()));
+                realPartTextField.setOpacity(0.5);
+                realPartTextField.setEditable(false);
+                realPartTextField.setStyle("-fx-text-inner-color: green;");
             }
             System.out.println("Checkbox chosen");
         }
 
 
-        else if (e.getSource().equals(ComputeButton)){
+        else if (e.getSource().equals(computeButton)){
             System.out.println("Compute button has been pressed");
             Initialize.computationInit();
-            DataToChart.addData();
-            ZetaChart.getData().add(DataToChart.series);
+            //DataToChart.addData();
+            zetaChart.getData().add(DataToChart.series);
         }
-        else if (e.getSource().equals(StopButton)){
+        else if (e.getSource().equals(stopButton)){
             Initialize.setStop(true);
         }
     }
@@ -129,31 +117,31 @@ public class Controller {
     //event handler dla wciskanych klawiszy
     @FXML
     public void onKeyPressed(KeyEvent e){
-        if (e.getSource().equals(RealPartTextField)){
+        if (e.getSource().equals(realPartTextField)){
             switch (e.getCode()){
                 case BACK_SPACE:
-                    RealPartTextField.setStyle("-fx-text-inner-color: red;");
+                    realPartTextField.setStyle("-fx-text-inner-color: red;");
                     break;
                 default:
                     break;
             }
         }
 
-        if (e.getSource().equals(ImgStepTextField)){
+        if (e.getSource().equals(imgStepTextField)){
             System.out.println("Wcisnales imgstep");
             switch (e.getCode()){
                 case BACK_SPACE:
-                    ImgStepTextField.setStyle("-fx-text-inner-color: red;");
+                    imgStepTextField.setStyle("-fx-text-inner-color: red;");
                     break;
                 default:
                     break;
             }
         }
 
-        if (e.getSource().equals(IterNoTextField)){
+        if (e.getSource().equals(iterNoTextField)){
             switch (e.getCode()){
                 case BACK_SPACE:
-                    IterNoTextField.setStyle("-fx-text-inner-color: red;");
+                    iterNoTextField.setStyle("-fx-text-inner-color: red;");
                     break;
                 default:
                     break;
@@ -163,18 +151,25 @@ public class Controller {
 
     @FXML
     public void initialize(){
-        RealPartChangeButton.setDisable(true);
+        realPartChangeButton.setDisable(true);
         DataGeneration.randomReal();
-        RealPartTextField.setText(Double.toString(DataGeneration.getterReal()));
-        RealPartTextField.setEditable(false);
-        RealPartTextField.setOpacity(0.5);
-        DataGeneration.setterImagStart(Double.parseDouble(ImgStartTextField.getText()));
-        DataGeneration.setterImagStep(Double.parseDouble(ImgStepTextField.getText()));
-        Initialize.setterIterationsAmount(Integer.parseInt(IterNoTextField.getText()));
+        realPartTextField.setText(Double.toString(DataGeneration.getterReal()));
+        realPartTextField.setEditable(false);
+        realPartTextField.setOpacity(0.5);
+        DataGeneration.setterImagStart(Double.parseDouble(imgStartTextField.getText()));
+        DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
+        Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
 
-        RealPartTextField.setStyle("-fx-text-inner-color: green;");
-        ImgStartTextField.setStyle("-fx-text-inner-color: green;");
-        ImgStepTextField.setStyle("-fx-text-inner-color: green;");
-        IterNoTextField.setStyle("-fx-text-inner-color: green;");
+        realPartTextField.setStyle("-fx-text-inner-color: green;");
+        imgStartTextField.setStyle("-fx-text-inner-color: green;");
+        imgStepTextField.setStyle("-fx-text-inner-color: green;");
+        iterNoTextField.setStyle("-fx-text-inner-color: green;");
+        //ProgBar.setProgress(0.0);
     }
+
+    /*@FXML
+    public static void computationProgress(int iterationsAmount, int currentIterations){
+        double progress = (double)(currentIterations/iterationsAmount);
+        ProgBar.setProgress(progress);
+    }*/
 }
