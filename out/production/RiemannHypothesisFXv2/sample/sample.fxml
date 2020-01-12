@@ -34,7 +34,7 @@
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin></Button>
-                  <ChoiceBox id="choiceBox" prefHeight="27.0" prefWidth="74.0">
+                  <ChoiceBox id="choiceBox" accessibleText="ok" prefHeight="27.0" prefWidth="74.0">
                      <effect>
                         <InnerShadow>
                            <color>
@@ -78,7 +78,7 @@
          <center>
             <Pane fx:id="Pejn">
                <children>
-                  <LineChart fx:id="zetaChart" onMouseClicked="#onMouseClicked" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
+                  <LineChart fx:id="zetaChart" prefHeight="403.0" prefWidth="502.0" title="Zeta Plot">
                     <xAxis>
                       <NumberAxis label="ReZ" side="BOTTOM" fx:id="xAxis" />
                     </xAxis>

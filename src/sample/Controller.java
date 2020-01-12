@@ -2,27 +2,19 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.*;
-import javafx.scene.control.*;
+import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import sample.data.DataGeneration;
 import sample.data.DataToChart;
 import sample.data.DataValidation;
 import sample.data.Initialize;
-
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import sample.view.View;
 
 public class Controller {
-
-    @FXML
-    private Pane Pejn;
-    @FXML
-    private NumberAxis xAxis;
-    @FXML
-    private NumberAxis yAxis;
     @FXML
     private LineChart<Number, Number> zetaChart;
     @FXML
@@ -36,8 +28,6 @@ public class Controller {
     @FXML
     private Button computeButton;
     @FXML
-    private Button stopButton;
-    @FXML
     private CheckBox realPartCheckbox;
     @FXML
     private TextField realPartTextField;
@@ -47,115 +37,99 @@ public class Controller {
     private TextField imgStepTextField;
     @FXML
     private TextField iterNoTextField;
-    @FXML
-    private ProgressBar bar;
-    @FXML
-    private ChoiceBox<String> choiceBox;
-
-
-    //    event handler dla przyciskow i checkboxa
 
     /**
-     * gygyjhjhhj
-     * @param e
+     * Method handling events (for buttons)
+     *
+     * @param e event representing button clicked
      */
     @FXML
-    public void onButtonClicked(ActionEvent e){
-        if (e.getSource().equals(realPartChangeButton)){
-            if (DataValidation.realPartCheck(Double.parseDouble(realPartTextField.getText()))){
-                setGreen(realPartTextField);
+    public void onButtonClicked(ActionEvent e) {
+        View view = new View();
+        if (e.getSource().equals(realPartChangeButton)) {
+            if (DataValidation.realPartCheck(Double.parseDouble(realPartTextField.getText()))) {
+                view.setGreen(realPartTextField);
                 DataGeneration.setterReal(Double.parseDouble(realPartTextField.getText()));
-            }
-            else {
-                realPartTextField.setText("Invalid data.");
+            } else {
+                view.setText(realPartTextField, "Invalid data.");
+                view.setRed(realPartTextField);
             }
             System.out.println("RealPart Change Button chosen");
-        }
-        else if (e.getSource().equals(imgStartChangeButton)){
+        } else if (e.getSource().equals(imgStartChangeButton)) {
             DataGeneration.setterImagStart(Double.parseDouble(imgStartTextField.getText()));
             System.out.println("Img Start Change Button chosen");
-        }
-        else if (e.getSource().equals(imgStepChangeButton)){
-            if (DataValidation.imgStepCheck(Double.parseDouble(imgStepTextField.getText()))){
-                setGreen(imgStepTextField);
+        } else if (e.getSource().equals(imgStepChangeButton)) {
+            if (DataValidation.imgStepCheck(Double.parseDouble(imgStepTextField.getText()))) {
+                view.setGreen(imgStepTextField);
                 DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
-            }
-            else
-                imgStepTextField.setText("Invalid data.");
+            } else
+                view.setText(imgStepTextField, "Invalid data.");
             System.out.println("Img Step Change Button chosen");
-        }
-        else if (e.getSource().equals(iterNoChangeButton)){
-            if (DataValidation.iterNoCheck(Double.parseDouble(iterNoTextField.getText()))){
+        } else if (e.getSource().equals(iterNoChangeButton)) {
+            if (DataValidation.iterNoCheck(Double.parseDouble(iterNoTextField.getText()))) {
                 Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
-                setGreen(iterNoTextField);
-            }
-            else
-                iterNoTextField.setText("Invalid data.");
+                view.setGreen(iterNoTextField);
+            } else
+                view.setText(iterNoTextField, "Invalid data.");
             System.out.println("Iter No Change Button Chosen");
-        }
-        else if(e.getSource().equals(realPartCheckbox)){
-            if (!realPartCheckbox.isSelected()){
-                realPartChangeButton.setDisable(false);
-                realPartTextField.setOpacity(1.0);
-                realPartTextField.setEditable(true);
-            }
-            else{
-                realPartChangeButton.setDisable(true);
+        } else if (e.getSource().equals(realPartCheckbox)) {
+            if (!view.isSelected(realPartCheckbox)) {
+                view.setDisable(realPartChangeButton, false);
+                view.setOpacity(realPartTextField, 1.0);
+                view.setEditable(realPartTextField, true);
+            } else {
+                view.setDisable(realPartChangeButton, true);
                 DataGeneration.randomReal();
-                realPartTextField.setText(Double.toString(DataGeneration.getterReal()));
-                realPartTextField.setOpacity(0.5);
-                realPartTextField.setEditable(false);
-                setGreen(realPartTextField);
+                view.setText(realPartTextField, Double.toString(DataGeneration.getterReal()));
+                view.setOpacity(realPartTextField, 0.5);
+                view.setEditable(realPartTextField, false);
+                view.setGreen(realPartTextField);
             }
             System.out.println("Checkbox chosen");
-        }
-
-
-        else if (e.getSource().equals(computeButton)){
+        } else if (e.getSource().equals(computeButton)) {
             System.out.println("Compute button has been pressed");
             DataToChart.eraseData();
-            //DataToChart.showData();                                       tu mozesz pokazac blad odczytu - dane sa czyszczone
             Initialize.computationInit();
-            try{
-                zetaChart.getData().add(DataToChart.series);
-            }
-            catch (IllegalArgumentException ex){
+            try {
+                view.addDataToChart(zetaChart);
+            } catch (IllegalArgumentException ex) {
                 System.out.println("ex");
             }
         }
-        else if (e.getSource().equals(stopButton)){
-            Initialize.setStop(true);
-        }
     }
 
-    //event handler dla wciskanych klawiszy
+    /**
+     * Method handling pressing key events
+     *
+     * @param e button clicked event
+     */
     @FXML
-    public void onKeyPressed(KeyEvent e){
-        if (e.getSource().equals(realPartTextField)){
-            switch (e.getCode()){
+    public void onKeyPressed(KeyEvent e) {
+        View view = new View();
+        if (e.getSource().equals(realPartTextField)) {
+            switch (e.getCode()) {
                 case BACK_SPACE:
-                    setRed(realPartTextField);
+                    view.setRed(realPartTextField);
                     break;
                 default:
                     break;
             }
         }
 
-        if (e.getSource().equals(imgStepTextField)){
-            System.out.println("imgStepTextField chosen");
-            switch (e.getCode()){
+        if (e.getSource().equals(imgStepTextField)) {
+            switch (e.getCode()) {
                 case BACK_SPACE:
-                    setRed(imgStepTextField);
+                    view.setRed(imgStepTextField);
                     break;
                 default:
                     break;
             }
         }
 
-        if (e.getSource().equals(iterNoTextField)){
-            switch (e.getCode()){
+        if (e.getSource().equals(iterNoTextField)) {
+            switch (e.getCode()) {
                 case BACK_SPACE:
-                    setRed(iterNoTextField);
+                    view.setRed(iterNoTextField);
                     break;
                 default:
                     break;
@@ -164,48 +138,24 @@ public class Controller {
     }
 
     @FXML
-    public void onMouseClicked(MouseEvent e) throws FileNotFoundException {
-        PrintStream fileOut = new PrintStream("./out.txt");
-        System.setOut(fileOut);
-        System.out.println(" ");
-
-//        System.out.println(e.getX());
-//        DataToChart object = new DataToChart();
-//        object.showData();
-//        System.out.println(xAxis.getDisplayPosition(object.iks));
-    }
-
-    @FXML
-    public void initialize(){
-        realPartChangeButton.setDisable(true);
+    public void initialize() {
+        View view = new View();
+        view.setDisable(realPartChangeButton, true);
         DataGeneration.randomReal();
-        realPartTextField.setText(Double.toString(DataGeneration.getterReal()));
-        realPartTextField.setEditable(false);
-        realPartTextField.setOpacity(0.5);
+        view.setText(realPartTextField, Double.toString(DataGeneration.getterReal()));
+        view.setEditable(realPartTextField, false);
+        view.setOpacity(realPartTextField, 0.5);
         DataGeneration.setterImagStart(Double.parseDouble(imgStartTextField.getText()));
         DataGeneration.setterImagStep(Double.parseDouble(imgStepTextField.getText()));
         Initialize.setterIterationsAmount(Integer.parseInt(iterNoTextField.getText()));
-
-        setGreen(realPartTextField);
-        setGreen(imgStartTextField);
-        setGreen(imgStepTextField);
-        setGreen(iterNoTextField);
-
-
+        view.setGreen(realPartTextField);
+        view.setGreen(imgStartTextField);
+        view.setGreen(imgStepTextField);
+        view.setGreen(iterNoTextField);
     }
 
-    /*@FXML
-    public static void computationProgress(int iterationsAmount, int currentIterations){
-        double progress = (double)(currentIterations/iterationsAmount);
-        ProgBar.setProgress(progress);
-    }*/
-    private void setGreen(TextField field){
-        field.setStyle("-fx-text-inner-color: green;");
-    }
-    private void setRed(TextField field){
-        field.setStyle("-fx-text-inner-color: red;");
-    }
-    public void setBarProgress(ProgressBar b){
-        b.setProgress(Initialize.progress);
+    @FXML
+    public void onMouseClicked(MouseEvent e){               //Method, although not used, is necessary. Otherwise Java throws an exception
+
     }
 }
