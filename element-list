@@ -1,4 +1,5 @@
 module:RiemannHypothesisFXv2
 sample
 sample.data
+sample.tests
 sample.view

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"RiemannHypothesisFXv2","l":"sample"},{"m":"RiemannHypothesisFXv2","l":"sample.data"},{"m":"RiemannHypothesisFXv2","l":"sample.view"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"RiemannHypothesisFXv2","l":"sample"},{"m":"RiemannHypothesisFXv2","l":"sample.data"},{"m":"RiemannHypothesisFXv2","l":"sample.tests"},{"m":"RiemannHypothesisFXv2","l":"sample.view"}]
